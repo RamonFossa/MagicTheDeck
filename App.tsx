@@ -1,20 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Routes } from './src/routes/index'
+import { NavigationContainer } from "@react-navigation/native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { ThemeProvider } from 'styled-components';
+import theme from './src/theme'
+import { StatusBar } from 'react-native';
+// // import { PaperProvider } from 'react-native-paper';
 
 export default function App() {
+
+  // const isFirstOpen = (storageManager.getData('@firstOpen'));
+  // const isLoggedIn = (storageManager.getData('@loginData'));
+
+
+  const initialRoute = 'login'
+  // (async () => { await isFirstOpen }) ? 'onboard' :
+  //   (async () => { !(await isLoggedIn) }) ? 'login' : undefined
+
+  // const contextValue = AuthContextDefaultValues()
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+      <ThemeProvider theme={theme}>
+        <StatusBar
+          barStyle='light-content'
+          translucent={true}
+          backgroundColor='transparent'
+        />
+        <NavigationContainer>
+          <Routes />
+        </NavigationContainer>
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
